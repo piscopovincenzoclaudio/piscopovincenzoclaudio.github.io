@@ -1,0 +1,337 @@
+<!doctype html>
+<html lang="it">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Vincenzo Claudio Piscopo</title>
+<meta name="description" content="Vincenzo Claudio Piscopo. Palermo, Italia.">
+<meta property="og:title" content="Vincenzo Claudio Piscopo">
+<meta property="og:description" content="Palermo, Italia.">
+<meta property="og:type" content="website">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #0a1220;
+    --surface: #101d34;
+    --line: #1e2f4d;
+    --text: #eef2f8;
+    --text-dim: #8fa0bd;
+    --text-faint: #57678a;
+    --accent: #5b8cff;
+    --accent-soft: rgba(91,140,255,.14);
+    --max: 780px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+
+  body{
+    margin:0;
+    background:
+      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(91,140,255,.10), transparent 60%),
+      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 64px),
+      repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 64px),
+      var(--bg);
+    color: var(--text);
+    font-family: 'Inter', system-ui, sans-serif;
+    line-height: 1.65;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  ::selection{ background: var(--accent-soft); color: var(--text); }
+  a{ color: inherit; }
+  a:focus-visible, summary:focus-visible{
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+  }
+
+  .mono{ font-family: 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .04em; }
+
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+
+  .hud{
+    position: fixed; top: 20px; right: 24px; text-align: right;
+    font-size: .68rem; color: var(--text-faint); line-height: 1.6;
+    z-index: 10; pointer-events: none;
+  }
+  .hud .live{ color: var(--text-dim); }
+  @media (max-width: 640px){ .hud{ display:none; } }
+
+  /* ---------- Hero ---------- */
+  .hero{ position: relative; padding: 108px 0 50px; overflow: hidden; }
+
+  .orbit-svg{
+    position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
+    width: min(920px, 160vw); height: auto; z-index: 0; opacity: .55;
+  }
+  .orbit-path{
+    fill: none; stroke: var(--accent); stroke-width: 1;
+    stroke-dasharray: 3 7; opacity: .5; stroke-dashoffset: 0;
+    animation: draw 3.5s ease-out;
+  }
+  .orbit-dot{ fill: var(--accent); }
+  @keyframes draw{ from{ stroke-dashoffset: 900; opacity: 0; } to{ stroke-dashoffset: 0; opacity: .5; } }
+  @media (prefers-reduced-motion: reduce){
+    .orbit-path{ animation: none; }
+    #satellite{ display:none; }
+  }
+
+  .eyebrow{
+    position: relative; z-index: 1;
+    font-size: .72rem; text-transform: uppercase; color: var(--text-dim);
+    margin-bottom: 22px;
+  }
+
+  h1{
+    position: relative; z-index: 1;
+    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
+    font-size: clamp(2.4rem, 6.4vw, 4.1rem); line-height: 1.05;
+    letter-spacing: -.01em; margin: 0 0 22px;
+  }
+
+  .subhead{
+    position: relative; z-index: 1;
+    max-width: 50ch; font-size: 1.1rem; color: var(--text-dim); margin: 0;
+  }
+
+  /* ---------- Sections ---------- */
+  section{ padding: 42px 0; border-top: 1px solid var(--line); }
+
+  .label{ font-size: .72rem; text-transform: uppercase; color: var(--text-faint); margin: 0 0 18px; }
+
+  .about p{ font-size: 1.02rem; color: #d3dcec; max-width: 64ch; margin: 0 0 22px; }
+
+  .quick-links{ display: flex; flex-wrap: wrap; gap: 10px; }
+  .pill{
+    display: inline-flex; align-items: center;
+    padding: 7px 14px; font-size: .82rem;
+    border: 1px solid var(--line); border-radius: 999px;
+    text-decoration: none; color: var(--text-dim);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .pill:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
+
+  /* ---------- Two paths ---------- */
+  .paths{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 640px){ .paths{ grid-template-columns: 1fr; } }
+
+  .path{
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 12px;
+    padding: 4px;
+  }
+  .path summary{
+    list-style: none;
+    cursor: pointer;
+    padding: 18px 18px;
+    display: flex;
+    align-items: flex-start;
+    justify-content: space-between;
+    gap: 10px;
+  }
+  .path summary::-webkit-details-marker{ display:none; }
+  .path summary .st{
+    font-family: 'Space Grotesk', sans-serif;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: var(--text);
+    display: block;
+    margin-bottom: 5px;
+  }
+  .path summary .teaser{
+    display: block;
+    font-size: .86rem;
+    color: var(--text-faint);
+    font-weight: 400;
+  }
+  .chevron{
+    flex-shrink: 0;
+    width: 18px; height: 18px;
+    color: var(--accent);
+    transition: transform .2s ease;
+    margin-top: 4px;
+  }
+  .path[open] .chevron{ transform: rotate(180deg); }
+
+  .path-body{
+    padding: 0 18px 22px;
+    border-top: 1px solid var(--line);
+    margin-top: 2px;
+  }
+  .path-body p{
+    font-size: .96rem;
+    color: #d3dcec;
+    margin: 18px 0 20px;
+  }
+
+  .role-row{
+    display: flex; gap: 14px; padding: 10px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: .86rem;
+  }
+  .role-row:last-of-type{ border-bottom: none; }
+  .role-row .yr{ flex-shrink:0; width: 4.2ch; color: var(--accent); }
+  .role-row .rb strong{ display:block; color: var(--text); font-weight: 600; }
+  .role-row .rb span{ display:block; color: var(--text-dim); margin-top: 2px; font-size: .84rem; }
+
+  .path-links{
+    display: flex; flex-wrap: wrap; gap: 8px;
+    margin-top: 16px;
+  }
+  .path-links a{
+    font-size: .78rem;
+    padding: 6px 12px;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--text-dim);
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .path-links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
+
+  footer{
+    padding: 40px 0 60px; border-top: 1px solid var(--line);
+    color: var(--text-faint); font-size: .78rem;
+    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+  }
+</style>
+</head>
+<body>
+
+<div class="hud mono">
+  <div>38.1157°N&nbsp; 13.3615°E</div>
+  <div class="live" id="clock">PALERMO · --:--:--</div>
+</div>
+
+<div class="wrap">
+
+  <header class="hero">
+    <svg class="orbit-svg" viewBox="0 0 920 260" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
+      <path id="orbitPath" class="orbit-path" d="M -40 210 C 180 20, 740 20, 960 210" />
+      <circle id="satellite" class="orbit-dot" r="3.5">
+        <animateMotion dur="9s" repeatCount="indefinite" rotate="auto">
+          <mpath href="#orbitPath"/>
+        </animateMotion>
+      </circle>
+    </svg>
+
+    <p class="eyebrow mono">Palermo, Italia</p>
+    <h1>Vincenzo Claudio<br>Piscopo</h1>
+    <p class="subhead">Ingegnere per formazione, impegnato in politica per scelta. Stesso metodo in entrambi i campi: guardare i dati prima delle etichette.</p>
+  </header>
+
+  <section class="about">
+    <p class="label mono">Chi sono</p>
+    <p>
+      Sono cresciuto vicino a un aeroporto e ho passato ore a guardare gli aerei atterrare e decollare: è così che è iniziata la mia ossessione per tutto ciò che vola. Da lì ho provato a portare lo stesso approccio ovunque: guardare i dati, capire cosa funziona davvero, costruire partendo da quello. Sono un ingegnere di formazione. Negli ultimi anni sono diventato anche una persona che ha scelto di impegnarsi pubblicamente per la propria terra, la Sicilia. Qui sotto trovi entrambi i percorsi.
+    </p>
+    <div class="quick-links">
+      <a class="pill" href="https://www.linkedin.com/in/vincenzoclaudiopiscopo/" target="_blank" rel="noopener">LinkedIn</a>
+      <a class="pill" href="https://substack.com/@vincenzoclaudiopiscopo" target="_blank" rel="noopener">Substack</a>
+      <a class="pill" href="https://www.instagram.com/vincenzoclaudiopiscopo/" target="_blank" rel="noopener">Instagram</a>
+      <a class="pill" href="https://www.youtube.com/@VincenzoClaudio_Piscopo" target="_blank" rel="noopener">YouTube</a>
+    </div>
+  </section>
+
+  <section class="paths-section">
+    <p class="label mono">Due percorsi</p>
+    <div class="paths">
+
+      <details class="path">
+        <summary>
+          <span>
+            <span class="st">Professione</span>
+            <span class="teaser">Ingegnere aerospaziale. RAMS, droni e satelliti.</span>
+          </span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="path-body">
+          <p>Mi occupo di RAMS (Reliability, Availability, Maintainability, Safety) su sistemi aerospaziali critici: droni e piattaforme satellitari, dove un guasto non è un'opzione. Sono Project Manager presso Zetalab, dove seguo attività di RAMS e verifica e validazione (V&amp;V) su sistemi UAV e satellitari. Scrivo anche di aviazione per testate internazionali.</p>
+
+          <div class="role-row">
+            <span class="yr mono">2022</span>
+            <span class="rb"><strong>Laurea Magistrale, Ingegneria Aerospaziale</strong><span>Università degli Studi di Palermo</span></span>
+          </div>
+          <div class="role-row">
+            <span class="yr mono">2019</span>
+            <span class="rb"><strong>Laurea, Ingegneria Meccanica (curriculum aeronautico)</strong><span>Tesi su Human Factors nella manutenzione aeronautica</span></span>
+          </div>
+
+          <div class="path-links">
+            <a href="https://www.zeta-lab.it/en" target="_blank" rel="noopener">Zetalab</a>
+            <a href="https://airlinegeeks.com/author/vincenzocpiscopo/" target="_blank" rel="noopener">AirlineGeeks</a>
+            <a href="https://simpleflying.com/author/vincenzo-claudio-piscopo/" target="_blank" rel="noopener">Simple Flying</a>
+          </div>
+        </div>
+      </details>
+
+      <details class="path">
+        <summary>
+          <span>
+            <span class="st">Politica</span>
+            <span class="teaser">ORA!, Sicilia. Il metodo prima delle etichette.</span>
+          </span>
+          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
+        </summary>
+        <div class="path-body">
+          <p>Faccio parte di ORA!, partito nazionale di centro nato il 10 ottobre 2025. Il nostro metodo: si descrive un problema con dati reali, si costruiscono proposte argomentate, si valutano le conseguenze, si sceglie la soluzione migliore, senza guardare al colore ideologico. In Sicilia lavoriamo su tre fronti: fermare la fuga dei talenti, costruire uno stato competente, spostare l'economia verso la produttività. Un principio guida tutto: ogni euro pubblico deve produrre un risultato misurabile ed essere revocabile se quel risultato non arriva. Il 70% degli iscritti a ORA! ha meno di 40 anni: non parliamo del futuro dei giovani senza i giovani, lo costruiamo insieme a loro.</p>
+
+          <div class="role-row">
+            <span class="yr mono">·</span>
+            <span class="rb"><strong>Vice Coordinatore Regionale ORA! Sicilia</strong></span>
+          </div>
+          <div class="role-row">
+            <span class="yr mono">·</span>
+            <span class="rb"><strong>Referente Provinciale di Palermo</strong></span>
+          </div>
+          <div class="role-row">
+            <span class="yr mono">·</span>
+            <span class="rb"><strong>Membro dell'Assemblea Nazionale</strong></span>
+          </div>
+
+          <div class="path-links">
+            <a href="https://ora-italia.it" target="_blank" rel="noopener">Sito ORA!</a>
+            <a href="https://x.com/piscopoora" target="_blank" rel="noopener">X</a>
+            <a href="https://www.instagram.com/piscopo.ora/" target="_blank" rel="noopener">Instagram</a>
+            <a href="https://www.tiktok.com/@piscopo.ora" target="_blank" rel="noopener">TikTok</a>
+            <a href="https://www.threads.com/@piscopo.ora" target="_blank" rel="noopener">Threads</a>
+            <a href="https://www.facebook.com/orapiscopo" target="_blank" rel="noopener">Facebook</a>
+          </div>
+        </div>
+      </details>
+
+    </div>
+  </section>
+
+  <footer class="mono">
+    <span>Palermo, Italia</span>
+    <span>© 2026 Vincenzo Claudio Piscopo</span>
+  </footer>
+
+</div>
+
+<script>
+  function tick(){
+    var el = document.getElementById('clock');
+    if(!el) return;
+    var now = new Date();
+    var parts = new Intl.DateTimeFormat('it-IT', {
+      hour: '2-digit', minute: '2-digit', second: '2-digit',
+      hour12: false, timeZone: 'Europe/Rome'
+    }).format(now);
+    el.textContent = 'PALERMO · ' + parts;
+  }
+  tick();
+  setInterval(tick, 1000);
+</script>
+
+</body>
+</html>
