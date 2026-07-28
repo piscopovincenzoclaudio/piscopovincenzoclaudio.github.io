@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="it">
+<html lang="it" class="lang-it">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -8,41 +8,57 @@
 <meta property="og:title" content="Vincenzo Claudio Piscopo">
 <meta property="og:description" content="Palermo, Italia.">
 <meta property="og:type" content="website">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%235b8cff'%3E%3Cpath d='M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L13 19v-5.5z'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;700&family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Inter:wght@400;500;600;700;800&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
 <style>
   :root{
     --bg: #0a1220;
-    --surface: #101d34;
-    --line: #1e2f4d;
-    --text: #eef2f8;
-    --text-dim: #8fa0bd;
-    --text-faint: #57678a;
+    --surface: #111f38;
+    --line: #1c2c48;
+    --text: #f2f5fa;
+    --text-dim: #92a1bd;
+    --text-faint: #5b6b8c;
     --accent: #5b8cff;
     --accent-soft: rgba(91,140,255,.14);
-    --max: 780px;
+    --max: 700px;
   }
 
   *{box-sizing:border-box;}
   html{scroll-behavior:smooth;}
 
+  [data-lang="en"]{ display: none; }
+  html.lang-en [data-lang="en"]{ display: inline; }
+  html.lang-en [data-lang="it"]{ display: none; }
+
   body{
     margin:0;
-    background:
-      radial-gradient(ellipse 900px 500px at 50% -10%, rgba(91,140,255,.10), transparent 60%),
-      repeating-linear-gradient(0deg, rgba(255,255,255,.025) 0 1px, transparent 1px 64px),
-      repeating-linear-gradient(90deg, rgba(255,255,255,.025) 0 1px, transparent 1px 64px),
-      var(--bg);
+    background: var(--bg);
     color: var(--text);
     font-family: 'Inter', system-ui, sans-serif;
     line-height: 1.65;
     -webkit-font-smoothing: antialiased;
+    position: relative;
   }
+
+  body::before{
+    content:"";
+    position: fixed; inset: 0;
+    background: radial-gradient(ellipse 900px 560px at 50% -10%, rgba(91,140,255,.11), transparent 62%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .bg-icons{ position: fixed; inset: 0; overflow: hidden; z-index: 0; pointer-events: none; }
+  .bg-icons svg{ position: absolute; stroke: var(--accent); fill: none; opacity: .045; }
+  .ic-plane1{ top: -20px; left: -50px; width: 200px; height: 200px; transform: rotate(18deg); }
+  .ic-sat{ top: 66%; right: -60px; width: 220px; height: 220px; transform: rotate(-12deg); }
+  @media (max-width: 640px){ .ic-plane1{ width: 130px; height: 130px; } .ic-sat{ width: 150px; height: 150px; } }
 
   ::selection{ background: var(--accent-soft); color: var(--text); }
   a{ color: inherit; }
-  a:focus-visible, summary:focus-visible{
+  a:focus-visible, button:focus-visible{
     outline: 2px solid var(--accent);
     outline-offset: 3px;
     border-radius: 4px;
@@ -50,22 +66,65 @@
 
   .mono{ font-family: 'IBM Plex Mono', ui-monospace, monospace; letter-spacing: .04em; }
 
-  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; }
+  .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
-  .hud{
-    position: fixed; top: 20px; right: 24px; text-align: right;
-    font-size: .68rem; color: var(--text-faint); line-height: 1.6;
-    z-index: 10; pointer-events: none;
+  .langsw{
+    position: fixed; top: 20px; left: 24px; z-index: 20;
+    display: flex; gap: 2px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 3px;
   }
-  .hud .live{ color: var(--text-dim); }
-  @media (max-width: 640px){ .hud{ display:none; } }
+  .langsw button{
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: .68rem;
+    letter-spacing: .04em;
+    background: transparent;
+    border: none;
+    color: var(--text-faint);
+    padding: 5px 11px;
+    border-radius: 999px;
+    cursor: pointer;
+  }
+  html.lang-it .langsw button[data-set="it"],
+  html.lang-en .langsw button[data-set="en"]{
+    background: var(--accent-soft);
+    color: var(--text);
+  }
+  .langsw .mailbtn{
+    display: flex; align-items: center; justify-content: center;
+    width: 28px; height: 28px;
+    color: var(--text-faint);
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color .15s ease, background .15s ease;
+  }
+  .langsw .mailbtn:hover{ color: var(--text); background: var(--accent-soft); }
+  .langsw .mailbtn svg{ width: 14px; height: 14px; }
 
-  /* ---------- Hero ---------- */
-  .hero{ position: relative; padding: 108px 0 50px; overflow: hidden; }
+  .sr-only{
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- Hero (simple, default/mobile) ---------- */
+  .hero-epic{ display: none; }
+
+  .hero{
+    position: relative;
+    padding: 128px 0 64px;
+    overflow: hidden;
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
 
   .orbit-svg{
     position: absolute; top: -40px; left: 50%; transform: translateX(-50%);
-    width: min(920px, 160vw); height: auto; z-index: 0; opacity: .55;
+    width: min(920px, 160vw); height: auto; z-index: 0; opacity: .5;
   }
   .orbit-path{
     fill: none; stroke: var(--accent); stroke-width: 1;
@@ -79,114 +138,128 @@
     #satellite{ display:none; }
   }
 
-  .eyebrow{
-    position: relative; z-index: 1;
-    font-size: .72rem; text-transform: uppercase; color: var(--text-dim);
-    margin-bottom: 22px;
+  .avatar{
+    position: relative;
+    z-index: 1;
+    width: clamp(96px, 16vw, 132px);
+    height: clamp(96px, 16vw, 132px);
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 28px;
+    border: 1px solid var(--line);
+    box-shadow: 0 0 0 6px rgba(91,140,255,.06);
+    background: var(--surface);
   }
+  .avatar img{ width: 100%; height: 100%; object-fit: cover; display: block; }
 
   h1{
     position: relative; z-index: 1;
-    font-family: 'Space Grotesk', sans-serif; font-weight: 700;
-    font-size: clamp(2.4rem, 6.4vw, 4.1rem); line-height: 1.05;
-    letter-spacing: -.01em; margin: 0 0 22px;
+    font-family: 'Inter', sans-serif; font-weight: 800;
+    font-size: clamp(2.3rem, 6vw, 3.8rem); line-height: 1.06;
+    letter-spacing: -.02em; margin: 0 0 16px;
   }
+  h1.sr-only{ margin: 0; }
 
   .subhead{
     position: relative; z-index: 1;
-    max-width: 50ch; font-size: 1.1rem; color: var(--text-dim); margin: 0;
+    font-size: 1.05rem; color: var(--text-dim); margin: 0;
+  }
+
+  /* ---------- Hero (epic, wide screens) ---------- */
+  .hero-nav{
+    position: fixed; top: 20px; left: 100px; z-index: 20;
+    display: flex; gap: 6px;
+  }
+  .hero-nav a{
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: .68rem; letter-spacing: .04em;
+    color: var(--text-faint);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 6px 13px;
+    border-radius: 999px;
+    text-decoration: none;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .hero-nav a:hover{ color: var(--text); border-color: rgba(91,140,255,.5); }
+
+  .hero-tag{
+    position: fixed; top: 20px; right: 24px; z-index: 20;
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: .7rem; color: var(--text-dim); text-align: right; line-height: 1.5;
+  }
+
+  .hero-epic-inner{
+    padding: 150px 0 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-stage{
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  .hero-line{
+    font-family: 'Bebas Neue', sans-serif;
+    font-weight: 400;
+    font-size: clamp(3.6rem, 9vw, 7.2rem);
+    line-height: .82;
+    letter-spacing: .01em;
+    color: var(--text);
+    position: relative;
+    z-index: 1;
+  }
+  .hero-line-top{ margin-bottom: -.22em; }
+  .hero-line-bottom{ margin-top: -.22em; }
+  .hero-photo{
+    position: relative;
+    z-index: 2;
+    width: clamp(230px, 27vw, 380px);
+    -webkit-mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, black 55%, transparent 100%);
+            mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, black 55%, transparent 100%);
+  }
+  .hero-photo img{ width: 100%; display: block; }
+
+  @media (min-width: 880px){
+    .hero{ display: none; }
+    .hero-epic{ display: block; }
   }
 
   /* ---------- Sections ---------- */
-  section{ padding: 42px 0; border-top: 1px solid var(--line); }
+  section{ padding: 60px 0; border-top: 1px solid var(--line); }
 
-  .label{ font-size: .72rem; text-transform: uppercase; color: var(--text-faint); margin: 0 0 18px; }
-
-  .about p{ font-size: 1.02rem; color: #d3dcec; max-width: 64ch; margin: 0 0 22px; }
-
-  .quick-links{ display: flex; flex-wrap: wrap; gap: 10px; }
-  .pill{
-    display: inline-flex; align-items: center;
-    padding: 7px 14px; font-size: .82rem;
-    border: 1px solid var(--line); border-radius: 999px;
-    text-decoration: none; color: var(--text-dim);
-    transition: border-color .15s ease, color .15s ease;
+  .label{
+    position: relative;
+    font-size: .74rem; text-transform: uppercase; letter-spacing: .1em;
+    font-weight: 600; color: var(--text-faint); margin: 0 0 20px;
   }
-  .pill:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
-
-  /* ---------- Two paths ---------- */
-  .paths{
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 16px;
-  }
-  @media (max-width: 640px){ .paths{ grid-template-columns: 1fr; } }
-
-  .path{
-    background: var(--surface);
-    border: 1px solid var(--line);
-    border-radius: 12px;
-    padding: 4px;
-  }
-  .path summary{
-    list-style: none;
-    cursor: pointer;
-    padding: 18px 18px;
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 10px;
-  }
-  .path summary::-webkit-details-marker{ display:none; }
-  .path summary .st{
-    font-family: 'Space Grotesk', sans-serif;
-    font-weight: 700;
-    font-size: 1.1rem;
-    color: var(--text);
-    display: block;
-    margin-bottom: 5px;
-  }
-  .path summary .teaser{
-    display: block;
-    font-size: .86rem;
-    color: var(--text-faint);
-    font-weight: 400;
-  }
-  .chevron{
-    flex-shrink: 0;
-    width: 18px; height: 18px;
+  .egg{
+    position: absolute;
+    left: -20px; top: 50%;
+    width: 13px; height: 13px;
     color: var(--accent);
-    transition: transform .2s ease;
-    margin-top: 4px;
+    opacity: 0;
+    transform: translate(-6px, -50%);
+    transition: opacity .25s ease, transform .25s ease;
   }
-  .path[open] .chevron{ transform: rotate(180deg); }
+  .label:hover .egg{ opacity: 1; transform: translate(0, -50%); }
+  @media (prefers-reduced-motion: reduce){ .egg{ transition: none; } }
 
-  .path-body{
-    padding: 0 18px 22px;
-    border-top: 1px solid var(--line);
-    margin-top: 2px;
+  .copy p{ font-size: 1.02rem; color: #d6dfef; max-width: 62ch; margin: 0 0 16px; }
+  .copy p:last-child{ margin-bottom: 0; }
+  .copy p a{
+    color: var(--accent);
+    text-decoration-color: rgba(91,140,255,.4);
+    text-underline-offset: 3px;
   }
-  .path-body p{
-    font-size: .96rem;
-    color: #d3dcec;
-    margin: 18px 0 20px;
-  }
+  .copy p a:hover{ text-decoration-color: var(--accent); }
 
-  .role-row{
-    display: flex; gap: 14px; padding: 10px 0;
-    border-bottom: 1px solid var(--line);
-    font-size: .86rem;
-  }
-  .role-row:last-of-type{ border-bottom: none; }
-  .role-row .yr{ flex-shrink:0; width: 4.2ch; color: var(--accent); }
-  .role-row .rb strong{ display:block; color: var(--text); font-weight: 600; }
-  .role-row .rb span{ display:block; color: var(--text-dim); margin-top: 2px; font-size: .84rem; }
+  .note{ font-size: .92rem; color: var(--text-dim); margin: 22px 0 12px; }
 
-  .path-links{
-    display: flex; flex-wrap: wrap; gap: 8px;
-    margin-top: 16px;
-  }
-  .path-links a{
+  .links{ display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
+  .links a{
     font-size: .78rem;
     padding: 6px 12px;
     border: 1px solid var(--line);
@@ -195,23 +268,54 @@
     color: var(--text-dim);
     transition: border-color .15s ease, color .15s ease;
   }
-  .path-links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
+  .links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
 
   footer{
-    padding: 40px 0 60px; border-top: 1px solid var(--line);
+    padding: 48px 0 64px; border-top: 1px solid var(--line);
     color: var(--text-faint); font-size: .78rem;
-    display: flex; justify-content: space-between; flex-wrap: wrap; gap: 10px;
+    display: flex; justify-content: flex-end; flex-wrap: wrap; gap: 10px;
   }
 </style>
 </head>
 <body>
 
-<div class="hud mono">
-  <div>38.1157°N&nbsp; 13.3615°E</div>
-  <div class="live" id="clock">PALERMO · --:--:--</div>
+<div class="bg-icons" aria-hidden="true">
+  <svg class="ic-plane1" viewBox="0 0 24 24"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L13 19v-5.5z" stroke-width="0.6"/></svg>
+  <svg class="ic-sat" viewBox="0 0 64 64"><rect x="26" y="26" width="12" height="12" rx="1.5" stroke-width="1.3"/><line x1="14" y1="20" x2="26" y2="30" stroke-width="1.3"/><line x1="14" y1="12" x2="22" y2="12" stroke-width="1.3"/><line x1="14" y1="12" x2="14" y2="20" stroke-width="1.3"/><line x1="50" y1="44" x2="38" y2="34" stroke-width="1.3"/><line x1="50" y1="52" x2="42" y2="52" stroke-width="1.3"/><line x1="50" y1="44" x2="50" y2="52" stroke-width="1.3"/></svg>
+</div>
+
+<div class="langsw mono" role="group" aria-label="Language">
+  <button type="button" data-set="it" onclick="setLang('it')" aria-pressed="true">IT</button>
+  <button type="button" data-set="en" onclick="setLang('en')" aria-pressed="false">EN</button>
+  <a class="mailbtn" href="mailto:vincenzoclaudiopiscopo@gmail.com" title="vincenzoclaudiopiscopo@gmail.com" aria-label="Contattami via email">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+  </a>
 </div>
 
 <div class="wrap">
+
+  <header class="hero-epic">
+    <nav class="hero-nav" aria-label="Sezioni">
+      <a href="#chi-sono"><span data-lang="it">Chi sono</span><span data-lang="en">About me</span></a>
+      <a href="#lavoro"><span data-lang="it">Lavoro</span><span data-lang="en">Work</span></a>
+      <a href="#politica"><span data-lang="it">Politica</span><span data-lang="en">Politics</span></a>
+    </nav>
+    <div class="hero-tag">
+      <span data-lang="it">Ingegnere aerospaziale<br>Palermo, Italia</span>
+      <span data-lang="en">Aerospace engineer<br>Palermo, Italy</span>
+    </div>
+
+    <div class="hero-epic-inner">
+      <h1 class="sr-only">Vincenzo Claudio Piscopo</h1>
+      <div class="hero-stage">
+        <div class="hero-line hero-line-top" aria-hidden="true">VINCENZO</div>
+        <div class="hero-photo" aria-hidden="true">
+          <img src="profile-hero.jpg" alt="">
+        </div>
+        <div class="hero-line hero-line-bottom" aria-hidden="true">PISCOPO</div>
+      </div>
+    </div>
+  </header>
 
   <header class="hero">
     <svg class="orbit-svg" viewBox="0 0 920 260" preserveAspectRatio="xMidYMin meet" aria-hidden="true">
@@ -223,114 +327,90 @@
       </circle>
     </svg>
 
-    <p class="eyebrow mono">Palermo, Italia</p>
+    <div class="avatar">
+      <img src="profile.jpg" alt="Vincenzo Claudio Piscopo" onerror="this.parentElement.style.display='none'">
+    </div>
+
     <h1>Vincenzo Claudio<br>Piscopo</h1>
-    <p class="subhead">Ingegnere per formazione, impegnato in politica per scelta. Stesso metodo in entrambi i campi: guardare i dati prima delle etichette.</p>
+    <p class="subhead">
+      <span data-lang="it">Ingegnere aerospaziale</span>
+      <span data-lang="en">Aerospace engineer</span>
+    </p>
   </header>
 
-  <section class="about">
-    <p class="label mono">Chi sono</p>
-    <p>
-      Sono cresciuto vicino a un aeroporto e ho passato ore a guardare gli aerei atterrare e decollare: è così che è iniziata la mia ossessione per tutto ciò che vola. Da lì ho provato a portare lo stesso approccio ovunque: guardare i dati, capire cosa funziona davvero, costruire partendo da quello. Sono un ingegnere di formazione. Negli ultimi anni sono diventato anche una persona che ha scelto di impegnarsi pubblicamente per la propria terra, la Sicilia. Qui sotto trovi entrambi i percorsi.
+  <section class="copy" id="chi-sono">
+    <p class="label">
+      <span data-lang="it">Chi sono</span>
+      <span data-lang="en">About me</span>
     </p>
-    <div class="quick-links">
-      <a class="pill" href="https://www.linkedin.com/in/vincenzoclaudiopiscopo/" target="_blank" rel="noopener">LinkedIn</a>
-      <a class="pill" href="https://substack.com/@vincenzoclaudiopiscopo" target="_blank" rel="noopener">Substack</a>
-      <a class="pill" href="https://www.instagram.com/vincenzoclaudiopiscopo/" target="_blank" rel="noopener">Instagram</a>
-      <a class="pill" href="https://www.youtube.com/@VincenzoClaudio_Piscopo" target="_blank" rel="noopener">YouTube</a>
+    <p>
+      <span data-lang="it">Sono cresciuto vicino a un aeroporto e ho passato ore a guardare gli aerei atterrare e decollare: è così che è iniziata la mia ossessione per tutto ciò che vola.</span>
+      <span data-lang="en">I grew up near an airport and spent hours watching planes take off and land. That is how my obsession with everything that flies began.</span>
+    </p>
+    <p>
+      <span data-lang="it">Negli ultimi anni ho scelto di scendere in campo per la mia terra, la Sicilia, provando a cambiare le cose dall'interno.</span>
+      <span data-lang="en">In recent years I decided to step into the arena for my home, Sicily, and try to change things from the inside.</span>
+    </p>
+  </section>
+
+  <section class="copy" id="lavoro">
+    <p class="label">
+      <svg class="egg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L13 19v-5.5z"/></svg>
+      <span data-lang="it">Lavoro</span>
+      <span data-lang="en">Work</span>
+    </p>
+    <p>
+      <span data-lang="it">Lavoro nel settore Aerospace &amp; Defense, con un focus su affidabilità e sicurezza dei sistemi aerospaziali.</span>
+      <span data-lang="en">I work in the Aerospace &amp; Defense sector, focused on the reliability and safety of aerospace systems.</span>
+    </p>
+    <p class="note">
+      <span data-lang="it">Per approfondire, il mio LinkedIn qui sotto.</span>
+      <span data-lang="en">To learn more, my LinkedIn below.</span>
+    </p>
+    <div class="links">
+      <a href="https://www.linkedin.com/in/vincenzoclaudiopiscopo/" target="_blank" rel="noopener">LinkedIn</a>
     </div>
   </section>
 
-  <section class="paths-section">
-    <p class="label mono">Due percorsi</p>
-    <div class="paths">
+  <section class="copy" id="politica">
+    <p class="label">
+      <svg class="egg" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M21 16v-2l-8-5V3.5a1.5 1.5 0 0 0-3 0V9l-8 5v2l8-2.5V19l-2.5 1.8V22l3.5-1 3.5 1v-1.2L13 19v-5.5z"/></svg>
+      <span data-lang="it">Politica</span>
+      <span data-lang="en">Politics</span>
+    </p>
+    <p>
+      <span data-lang="it">Credo che i problemi si affrontino con i dati, non con le etichette. È il motivo per cui mi sono impegnato in <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, partito nazionale di centro nato nel 2025: in Sicilia lavoro per fermare la fuga dei talenti, costruire uno stato competente, spostare l'economia verso la produttività. Penso che ogni euro pubblico debba produrre un risultato misurabile, altrimenti vada tolto.</span>
+      <span data-lang="en">I believe problems get solved with data, not labels. That is why I got involved with <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, a national centrist party founded in 2025: in Sicily I work to stop the brain drain, build a competent state, and shift the economy toward productivity. I believe every euro of public money should produce a measurable result, or be cut.</span>
+    </p>
 
-      <details class="path">
-        <summary>
-          <span>
-            <span class="st">Professione</span>
-            <span class="teaser">Ingegnere aerospaziale. RAMS, droni e satelliti.</span>
-          </span>
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="path-body">
-          <p>Mi occupo di RAMS (Reliability, Availability, Maintainability, Safety) su sistemi aerospaziali critici: droni e piattaforme satellitari, dove un guasto non è un'opzione. Sono Project Manager presso Zetalab, dove seguo attività di RAMS e verifica e validazione (V&amp;V) su sistemi UAV e satellitari. Scrivo anche di aviazione per testate internazionali.</p>
-
-          <div class="role-row">
-            <span class="yr mono">2022</span>
-            <span class="rb"><strong>Laurea Magistrale, Ingegneria Aerospaziale</strong><span>Università degli Studi di Palermo</span></span>
-          </div>
-          <div class="role-row">
-            <span class="yr mono">2019</span>
-            <span class="rb"><strong>Laurea, Ingegneria Meccanica (curriculum aeronautico)</strong><span>Tesi su Human Factors nella manutenzione aeronautica</span></span>
-          </div>
-
-          <div class="path-links">
-            <a href="https://www.zeta-lab.it/en" target="_blank" rel="noopener">Zetalab</a>
-            <a href="https://airlinegeeks.com/author/vincenzocpiscopo/" target="_blank" rel="noopener">AirlineGeeks</a>
-            <a href="https://simpleflying.com/author/vincenzo-claudio-piscopo/" target="_blank" rel="noopener">Simple Flying</a>
-          </div>
-        </div>
-      </details>
-
-      <details class="path">
-        <summary>
-          <span>
-            <span class="st">Politica</span>
-            <span class="teaser">ORA!, Sicilia. Il metodo prima delle etichette.</span>
-          </span>
-          <svg class="chevron" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M6 9l6 6 6-6"/></svg>
-        </summary>
-        <div class="path-body">
-          <p>Faccio parte di ORA!, partito nazionale di centro nato il 10 ottobre 2025. Il nostro metodo: si descrive un problema con dati reali, si costruiscono proposte argomentate, si valutano le conseguenze, si sceglie la soluzione migliore, senza guardare al colore ideologico. In Sicilia lavoriamo su tre fronti: fermare la fuga dei talenti, costruire uno stato competente, spostare l'economia verso la produttività. Un principio guida tutto: ogni euro pubblico deve produrre un risultato misurabile ed essere revocabile se quel risultato non arriva. Il 70% degli iscritti a ORA! ha meno di 40 anni: non parliamo del futuro dei giovani senza i giovani, lo costruiamo insieme a loro.</p>
-
-          <div class="role-row">
-            <span class="yr mono">·</span>
-            <span class="rb"><strong>Vice Coordinatore Regionale ORA! Sicilia</strong></span>
-          </div>
-          <div class="role-row">
-            <span class="yr mono">·</span>
-            <span class="rb"><strong>Referente Provinciale di Palermo</strong></span>
-          </div>
-          <div class="role-row">
-            <span class="yr mono">·</span>
-            <span class="rb"><strong>Membro dell'Assemblea Nazionale</strong></span>
-          </div>
-
-          <div class="path-links">
-            <a href="https://ora-italia.it" target="_blank" rel="noopener">Sito ORA!</a>
-            <a href="https://x.com/piscopoora" target="_blank" rel="noopener">X</a>
-            <a href="https://www.instagram.com/piscopo.ora/" target="_blank" rel="noopener">Instagram</a>
-            <a href="https://www.tiktok.com/@piscopo.ora" target="_blank" rel="noopener">TikTok</a>
-            <a href="https://www.threads.com/@piscopo.ora" target="_blank" rel="noopener">Threads</a>
-            <a href="https://www.facebook.com/orapiscopo" target="_blank" rel="noopener">Facebook</a>
-          </div>
-        </div>
-      </details>
-
+    <p class="note">
+      <span data-lang="it">Per approfondire e per seguirmi, trovi i miei profili pubblici qui sotto.</span>
+      <span data-lang="en">To learn more and follow me, here are my public profiles below.</span>
+    </p>
+    <div class="links">
+      <a href="https://substack.com/@vincenzoclaudiopiscopo" target="_blank" rel="noopener">Substack</a>
+      <a href="https://www.youtube.com/@VincenzoClaudio_Piscopo" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://x.com/piscopoora" target="_blank" rel="noopener">X</a>
+      <a href="https://www.instagram.com/piscopo.ora/" target="_blank" rel="noopener">Instagram</a>
+      <a href="https://www.tiktok.com/@piscopo.ora" target="_blank" rel="noopener">TikTok</a>
+      <a href="https://www.threads.com/@piscopo.ora" target="_blank" rel="noopener">Threads</a>
+      <a href="https://www.facebook.com/orapiscopo" target="_blank" rel="noopener">Facebook</a>
     </div>
   </section>
 
   <footer class="mono">
-    <span>Palermo, Italia</span>
     <span>© 2026 Vincenzo Claudio Piscopo</span>
   </footer>
 
 </div>
 
 <script>
-  function tick(){
-    var el = document.getElementById('clock');
-    if(!el) return;
-    var now = new Date();
-    var parts = new Intl.DateTimeFormat('it-IT', {
-      hour: '2-digit', minute: '2-digit', second: '2-digit',
-      hour12: false, timeZone: 'Europe/Rome'
-    }).format(now);
-    el.textContent = 'PALERMO · ' + parts;
+  function setLang(l){
+    document.documentElement.className = 'lang-' + l;
+    document.querySelectorAll('.langsw button').forEach(function(b){
+      b.setAttribute('aria-pressed', b.dataset.set === l ? 'true' : 'false');
+    });
   }
-  tick();
-  setInterval(tick, 1000);
 </script>
 
 </body>
