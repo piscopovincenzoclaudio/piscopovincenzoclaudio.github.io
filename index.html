@@ -270,6 +270,30 @@
   }
   .links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
 
+  .email-box{
+    display: inline-flex; align-items: center; gap: 14px;
+    margin-top: 6px;
+    padding: 12px 12px 12px 18px;
+    background: var(--surface);
+    border: 1px solid var(--line);
+    border-radius: 10px;
+  }
+  .email-box span{ font-size: .92rem; color: var(--text); }
+  .copybtn{
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: 'Inter', sans-serif;
+    font-size: .8rem; font-weight: 500;
+    color: var(--text-dim);
+    background: transparent;
+    border: 1px solid var(--line);
+    border-radius: 8px;
+    padding: 7px 12px;
+    cursor: pointer;
+    transition: border-color .15s ease, color .15s ease;
+  }
+  .copybtn:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
+  .copybtn svg{ width: 14px; height: 14px; flex-shrink: 0; }
+
   footer{
     padding: 48px 0 64px; border-top: 1px solid var(--line);
     color: var(--text-faint); font-size: .78rem;
@@ -287,7 +311,7 @@
 <div class="langsw mono" role="group" aria-label="Language">
   <button type="button" data-set="it" onclick="setLang('it')" aria-pressed="true">IT</button>
   <button type="button" data-set="en" onclick="setLang('en')" aria-pressed="false">EN</button>
-  <a class="mailbtn" href="mailto:vincenzoclaudiopiscopo@gmail.com" title="vincenzoclaudiopiscopo@gmail.com" aria-label="Contattami via email">
+  <a class="mailbtn" href="#contatti" aria-label="Contatti">
     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
   </a>
 </div>
@@ -299,6 +323,7 @@
       <a href="#chi-sono"><span data-lang="it">Chi sono</span><span data-lang="en">About me</span></a>
       <a href="#lavoro"><span data-lang="it">Lavoro</span><span data-lang="en">Work</span></a>
       <a href="#politica"><span data-lang="it">Politica</span><span data-lang="en">Politics</span></a>
+      <a href="#contatti"><span data-lang="it">Contatti</span><span data-lang="en">Contact</span></a>
     </nav>
     <div class="hero-tag">
       <span data-lang="it">Ingegnere aerospaziale<br>Palermo, Italia</span>
@@ -398,6 +423,27 @@
     </div>
   </section>
 
+  <section class="copy" id="contatti">
+    <p class="label">
+      <span data-lang="it">Contatti</span>
+      <span data-lang="en">Contact</span>
+    </p>
+    <p>
+      <span data-lang="it">Per domande, proposte o collaborazioni, scrivimi pure.</span>
+      <span data-lang="en">For questions, proposals, or collaborations, feel free to write to me.</span>
+    </p>
+    <div class="email-box mono">
+      <span>vincenzoclaudiopiscopo@gmail.com</span>
+      <button type="button" class="copybtn" onclick="copyEmail()">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+        <span class="copy-label">
+          <span data-lang="it">Copia</span>
+          <span data-lang="en">Copy</span>
+        </span>
+      </button>
+    </div>
+  </section>
+
   <footer class="mono">
     <span>© 2026 Vincenzo Claudio Piscopo</span>
   </footer>
@@ -410,6 +456,22 @@
     document.querySelectorAll('.langsw button').forEach(function(b){
       b.setAttribute('aria-pressed', b.dataset.set === l ? 'true' : 'false');
     });
+  }
+
+  function copyEmail(){
+    var email = 'vincenzoclaudiopiscopo@gmail.com';
+    var label = document.querySelector('.copy-label');
+    var original = label.innerHTML;
+    var isEn = document.documentElement.classList.contains('lang-en');
+    function done(){
+      label.textContent = isEn ? 'Copied' : 'Copiato';
+      setTimeout(function(){ label.innerHTML = original; }, 1600);
+    }
+    if(navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(email).then(done).catch(done);
+    } else {
+      done();
+    }
   }
 </script>
 
