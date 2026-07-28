@@ -68,13 +68,29 @@
 
   .wrap{ max-width: var(--max); margin: 0 auto; padding: 0 24px; position: relative; z-index: 1; }
 
+  .sr-only{
+    position: absolute; width: 1px; height: 1px;
+    padding: 0; margin: -1px; overflow: hidden;
+    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  }
+
+  /* ---------- Top bar (single fixed row, always present) ---------- */
+  .topbar{
+    position: fixed; top: 0; left: 0; right: 0; z-index: 30;
+    display: flex; align-items: center; justify-content: space-between;
+    gap: 12px;
+    padding: 20px 24px;
+    pointer-events: none;
+  }
+  .topbar > *{ pointer-events: auto; }
+
   .langsw{
-    position: fixed; top: 20px; left: 24px; z-index: 20;
     display: flex; gap: 2px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 999px;
     padding: 3px;
+    flex-shrink: 0;
   }
   .langsw button{
     font-family: 'IBM Plex Mono', ui-monospace, monospace;
@@ -103,11 +119,25 @@
   .langsw .mailbtn:hover{ color: var(--text); background: var(--accent-soft); }
   .langsw .mailbtn svg{ width: 14px; height: 14px; }
 
-  .sr-only{
-    position: absolute; width: 1px; height: 1px;
-    padding: 0; margin: -1px; overflow: hidden;
-    clip: rect(0,0,0,0); white-space: nowrap; border: 0;
+  .topnav{
+    display: flex; gap: 6px;
+    flex-wrap: wrap;
+    justify-content: flex-end;
   }
+  .topnav a{
+    font-family: 'IBM Plex Mono', ui-monospace, monospace;
+    font-size: .68rem; letter-spacing: .04em;
+    color: var(--text-faint);
+    background: var(--surface);
+    border: 1px solid var(--line);
+    padding: 6px 13px;
+    border-radius: 999px;
+    text-decoration: none;
+    white-space: nowrap;
+    transition: color .15s ease, border-color .15s ease;
+  }
+  .topnav a:hover{ color: var(--text); border-color: rgba(91,140,255,.5); }
+  @media (max-width: 639px){ .topnav{ display: none; } }
 
   /* ---------- Hero (simple, default/mobile) ---------- */
   .hero-epic{ display: none; }
@@ -165,38 +195,14 @@
     font-size: 1.05rem; color: var(--text-dim); margin: 0;
   }
 
-  /* ---------- Hero (epic, wide screens) ---------- */
-  .hero-nav{
-    position: fixed; top: 20px; left: 100px; z-index: 20;
-    display: flex; gap: 6px;
-  }
-  .hero-nav a{
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: .68rem; letter-spacing: .04em;
-    color: var(--text-faint);
-    background: var(--surface);
-    border: 1px solid var(--line);
-    padding: 6px 13px;
-    border-radius: 999px;
-    text-decoration: none;
-    transition: color .15s ease, border-color .15s ease;
-  }
-  .hero-nav a:hover{ color: var(--text); border-color: rgba(91,140,255,.5); }
-
-  .hero-tag{
-    position: fixed; top: 20px; right: 24px; z-index: 20;
-    font-family: 'IBM Plex Mono', ui-monospace, monospace;
-    font-size: .7rem; color: var(--text-dim); text-align: right; line-height: 1.5;
-  }
-
+  /* ---------- Hero (epic, wide screens, typographic only, no photo) ---------- */
   .hero-epic-inner{
-    padding: 150px 0 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 168px 24px 72px;
+    text-align: center;
   }
-  .hero-stage{
-    width: 100%;
+  .hero-name{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -204,23 +210,16 @@
   .hero-line{
     font-family: 'Bebas Neue', sans-serif;
     font-weight: 400;
-    font-size: clamp(3.6rem, 9vw, 7.2rem);
-    line-height: .82;
+    font-size: clamp(2.6rem, 6.4vw, 6rem);
+    line-height: 1.04;
     letter-spacing: .01em;
     color: var(--text);
-    position: relative;
-    z-index: 1;
   }
-  .hero-line-top{ margin-bottom: -.22em; }
-  .hero-line-bottom{ margin-top: -.22em; }
-  .hero-photo{
-    position: relative;
-    z-index: 2;
-    width: clamp(230px, 27vw, 380px);
-    -webkit-mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, black 55%, transparent 100%);
-            mask-image: radial-gradient(ellipse 62% 68% at 50% 48%, black 55%, transparent 100%);
+  .hero-role{
+    margin: 22px 0 0;
+    font-size: 1.05rem;
+    color: var(--text-dim);
   }
-  .hero-photo img{ width: 100%; display: block; }
 
   @media (min-width: 880px){
     .hero{ display: none; }
@@ -308,37 +307,35 @@
   <svg class="ic-sat" viewBox="0 0 64 64"><rect x="26" y="26" width="12" height="12" rx="1.5" stroke-width="1.3"/><line x1="14" y1="20" x2="26" y2="30" stroke-width="1.3"/><line x1="14" y1="12" x2="22" y2="12" stroke-width="1.3"/><line x1="14" y1="12" x2="14" y2="20" stroke-width="1.3"/><line x1="50" y1="44" x2="38" y2="34" stroke-width="1.3"/><line x1="50" y1="52" x2="42" y2="52" stroke-width="1.3"/><line x1="50" y1="44" x2="50" y2="52" stroke-width="1.3"/></svg>
 </div>
 
-<div class="langsw mono" role="group" aria-label="Language">
-  <button type="button" data-set="it" onclick="setLang('it')" aria-pressed="true">IT</button>
-  <button type="button" data-set="en" onclick="setLang('en')" aria-pressed="false">EN</button>
-  <a class="mailbtn" href="#contatti" aria-label="Contatti">
-    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-  </a>
+<div class="topbar">
+  <div class="langsw mono" role="group" aria-label="Language">
+    <button type="button" data-set="it" onclick="setLang('it')" aria-pressed="true">IT</button>
+    <button type="button" data-set="en" onclick="setLang('en')" aria-pressed="false">EN</button>
+    <a class="mailbtn" href="#contatti" aria-label="Contatti">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    </a>
+  </div>
+  <nav class="topnav mono" aria-label="Sezioni">
+    <a href="#chi-sono"><span data-lang="it">Chi sono</span><span data-lang="en">About me</span></a>
+    <a href="#lavoro"><span data-lang="it">Lavoro</span><span data-lang="en">Work</span></a>
+    <a href="#politica"><span data-lang="it">Politica</span><span data-lang="en">Politics</span></a>
+    <a href="#contatti"><span data-lang="it">Contatti</span><span data-lang="en">Contact</span></a>
+  </nav>
 </div>
 
 <div class="wrap">
 
   <header class="hero-epic">
-    <nav class="hero-nav" aria-label="Sezioni">
-      <a href="#chi-sono"><span data-lang="it">Chi sono</span><span data-lang="en">About me</span></a>
-      <a href="#lavoro"><span data-lang="it">Lavoro</span><span data-lang="en">Work</span></a>
-      <a href="#politica"><span data-lang="it">Politica</span><span data-lang="en">Politics</span></a>
-      <a href="#contatti"><span data-lang="it">Contatti</span><span data-lang="en">Contact</span></a>
-    </nav>
-    <div class="hero-tag">
-      <span data-lang="it">Ingegnere aerospaziale<br>Palermo, Italia</span>
-      <span data-lang="en">Aerospace engineer<br>Palermo, Italy</span>
-    </div>
-
     <div class="hero-epic-inner">
       <h1 class="sr-only">Vincenzo Claudio Piscopo</h1>
-      <div class="hero-stage">
-        <div class="hero-line hero-line-top" aria-hidden="true">VINCENZO</div>
-        <div class="hero-photo" aria-hidden="true">
-          <img src="profile-hero.jpg" alt="">
-        </div>
-        <div class="hero-line hero-line-bottom" aria-hidden="true">PISCOPO</div>
+      <div class="hero-name" aria-hidden="true">
+        <div class="hero-line">VINCENZO CLAUDIO</div>
+        <div class="hero-line">PISCOPO</div>
       </div>
+      <p class="hero-role">
+        <span data-lang="it">Ingegnere aerospaziale</span>
+        <span data-lang="en">Aerospace engineer</span>
+      </p>
     </div>
   </header>
 
