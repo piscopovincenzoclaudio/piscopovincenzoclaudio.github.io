@@ -272,17 +272,19 @@
   }
   .links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
 
-  .email-box{
-    display: inline-flex; align-items: center; gap: 14px;
-    margin-top: 6px;
-    padding: 12px 12px 12px 18px;
+  .email-display{
+    display: block;
+    padding: 14px 18px;
     background: var(--surface);
     border: 1px solid var(--line);
     border-radius: 10px;
+    font-size: .92rem;
+    color: var(--text);
+    word-break: break-all;
   }
-  .email-box span{ font-size: .92rem; color: var(--text); }
   .copybtn{
     display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 10px;
     font-family: 'Inter', sans-serif;
     font-size: .8rem; font-weight: 500;
     color: var(--text-dim);
@@ -412,8 +414,8 @@
       <span data-lang="en">Politics</span>
     </p>
     <p>
-      <span data-lang="it">Credo che i problemi si affrontino con i dati, non con le etichette. È il motivo per cui mi sono impegnato in <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, partito nazionale di centro nato nel 2025: in Sicilia lavoro per fermare la fuga dei talenti, costruire uno stato competente, spostare l'economia verso la produttività. Penso che ogni euro pubblico debba produrre un risultato misurabile, altrimenti vada tolto.</span>
-      <span data-lang="en">I believe problems get solved with data, not labels. That is why I got involved with <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, a national centrist party founded in 2025: in Sicily I work to stop the brain drain, build a competent state, and shift the economy toward productivity. I believe every euro of public money should produce a measurable result, or be cut.</span>
+      <span data-lang="it">Credo che la Sicilia e l'Italia abbiano un potenziale enorme, che troppo spesso resta inespresso per burocrazia e mancanza di visione. Penso che l'innovazione, e in particolare l'intelligenza artificiale usata in modo etico e responsabile, possa colmare questo divario: più produttività, meno sprechi, salari che crescono su basi reali. È per questo che mi impegno con <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, partito nazionale di centro nato nel 2025: in Sicilia lavoriamo per fermare la fuga dei talenti, costruire uno stato competente, spostare l'economia verso la produttività. Credo in una Sicilia che torni protagonista, e in un'Italia capace di stare al passo con i tempi.</span>
+      <span data-lang="en">I believe Sicily and Italy hold enormous potential, too often left unexpressed because of bureaucracy and a lack of vision. I think innovation, especially artificial intelligence used ethically and responsibly, can close that gap: more productivity, less waste, wages that grow on real grounds. That is why I am involved with <a href="https://ora-italia.it" target="_blank" rel="noopener">ORA!</a>, a national centrist party founded in 2025: in Sicily we work to stop the brain drain, build a competent state, and shift the economy toward productivity. I believe in a Sicily that becomes a protagonist again, and in an Italy able to keep pace with the times.</span>
     </p>
 
     <p class="note">
@@ -421,13 +423,13 @@
       <span data-lang="en">To learn more and follow me, here are my public profiles below.</span>
     </p>
     <div class="links">
-      <a href="https://substack.com/@vincenzoclaudiopiscopo" target="_blank" rel="noopener">Substack</a>
-      <a href="https://www.youtube.com/@VincenzoClaudio_Piscopo" target="_blank" rel="noopener">YouTube</a>
-      <a href="https://x.com/piscopoora" target="_blank" rel="noopener">X</a>
       <a href="https://www.instagram.com/piscopo.ora/" target="_blank" rel="noopener">Instagram</a>
       <a href="https://www.tiktok.com/@piscopo.ora" target="_blank" rel="noopener">TikTok</a>
-      <a href="https://www.threads.com/@piscopo.ora" target="_blank" rel="noopener">Threads</a>
+      <a href="https://x.com/piscopoora" target="_blank" rel="noopener">X</a>
       <a href="https://www.facebook.com/orapiscopo" target="_blank" rel="noopener">Facebook</a>
+      <a href="https://www.threads.com/@piscopo.ora" target="_blank" rel="noopener">Threads</a>
+      <a href="https://www.youtube.com/@VincenzoClaudio_Piscopo" target="_blank" rel="noopener">YouTube</a>
+      <a href="https://substack.com/@vincenzoclaudiopiscopo" target="_blank" rel="noopener">Substack</a>
     </div>
   </section>
 
@@ -440,16 +442,14 @@
       <span data-lang="it">Per domande, proposte o collaborazioni, scrivimi pure.</span>
       <span data-lang="en">For questions, proposals, or collaborations, feel free to write to me.</span>
     </p>
-    <div class="email-box mono">
-      <span>vincenzoclaudiopiscopo@gmail.com</span>
-      <button type="button" class="copybtn" onclick="copyEmail()">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
-        <span class="copy-label">
-          <span data-lang="it">Copia</span>
-          <span data-lang="en">Copy</span>
-        </span>
-      </button>
-    </div>
+    <div class="email-display mono">vincenzoclaudiopiscopo@gmail.com</div>
+    <button type="button" class="copybtn" onclick="copyEmail()">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="9" y="9" width="12" height="12" rx="2"/><path d="M5 15V5a2 2 0 0 1 2-2h10"/></svg>
+      <span class="copy-label">
+        <span data-lang="it">Copia</span>
+        <span data-lang="en">Copy</span>
+      </span>
+    </button>
   </section>
 
   <footer class="mono">
