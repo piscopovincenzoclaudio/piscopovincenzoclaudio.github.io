@@ -282,6 +282,18 @@
   }
   .links a:hover{ border-color: rgba(91,140,255,.5); color: var(--text); }
 
+  .datacard{
+    display: block; margin: 26px 0 8px; padding: 20px 22px;
+    background: var(--surface); border: 1px solid var(--line); border-left: 3px solid var(--accent);
+    border-radius: 10px; text-decoration: none; color: var(--text);
+    transition: border-color .15s ease, transform .15s ease;
+  }
+  .datacard:hover{ border-color: rgba(91,140,255,.5); border-left-color: var(--accent); transform: translateY(-1px); }
+  .datacard .dk{ font-size: .72rem; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); margin: 0 0 6px; }
+  .datacard .dt{ font-size: 1.05rem; font-weight: 600; margin: 0 0 4px; }
+  .datacard .dd{ font-size: .9rem; color: var(--text-dim); margin: 0; }
+  .datacard .arrow{ color: var(--accent); }
+
   .email-display{
     display: block;
     padding: 14px 18px;
@@ -453,6 +465,12 @@
       <span data-lang="it">Credo in una Sicilia che torni protagonista, e in un'Italia capace di stare al passo con i tempi.</span>
       <span data-lang="en">I believe Sicily can lead again, and Italy can keep pace with the times.</span>
     </p>
+
+    <a class="datacard" href="https://piscopo-ora.github.io" target="_blank" rel="noopener">
+      <p class="dk mono"><span data-lang="it">Dati e fonti</span><span data-lang="en">Data and sources</span></p>
+      <p class="dt"><span data-lang="it">La Sicilia in numeri, controllabili</span><span data-lang="en">Sicily in numbers you can check</span> <span class="arrow">&rarr;</span></p>
+      <p class="dd"><span data-lang="it">I dati dei miei video su Palermo e la Sicilia, con ogni fonte linkata.</span><span data-lang="en">The data behind my videos on Palermo and Sicily, every source linked.</span></p>
+    </a>
 
     <p class="note">
       <span data-lang="it">Per approfondire e per seguirmi, trovi i miei profili pubblici qui sotto.</span>
